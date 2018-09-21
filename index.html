@@ -9,10 +9,10 @@ audio_file.onchange = function(){
     audio_player.play();
 };
     
-var canvas = document.querySelector('canvas'),
-    ctx = canvas.getContext('2d');
+var canvas = document.querySelector("canvas"),
+    ctx = canvas.getContext("2d");
     
-var audio = document.querySelector('audio'),
+var audio = document.querySelector("audio"),
     audioContext = new AudioContext(),
     source = audioContext.createMediaElementSource(file),
     analyser = audioContext.createAnalyser();
