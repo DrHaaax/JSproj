@@ -1,2 +1,26 @@
-<h1>Test 1<h1>
-  <div>Test 2<div>
+var canvas = document.querySelector('canvas'),
+    ctx = canvas.getContext('2d');
+
+
+
+// here we create our chain
+var audio = document.querySelector('audio'),
+    audioContext = new AudioContext(),
+    source = audioContext.createMediaElementSource(audio),
+    analyser = audioContext.createAnalyser();
+
+source.connect(analyser);
+analyser.connect(audioContext.destination);
+
+setInterval(function(){
+  var freqData = new Uint8Array(analyser.frequencyBinCount);
+
+      analyser.getByteFrequencyData(freqData);
+
+      ctx.clearRect(0, 0, width, height);
+
+      for (var i = 0; i < freqData.length; i++ ) {
+        var magnitude = freqData[i];
+        ctx.fillRect(i*1.5, height, 1, -magnitude * 2);
+      }
+ }, 33);
