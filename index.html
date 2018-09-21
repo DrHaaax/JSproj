@@ -14,7 +14,7 @@ var canvas = document.querySelector('canvas'),
     
 var audio = document.querySelector('audio'),
     audioContext = new AudioContext(),
-    source = audioContext.createMediaElementSource(audio),
+    source = audioContext.createMediaElementSource(file),
     analyser = audioContext.createAnalyser();
 
 source.connect(analyser);
