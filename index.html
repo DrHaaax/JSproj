@@ -1,10 +1,17 @@
+<input id="audio_file" type="file" accept="audio/*" />
+<audio id="audio_player" />
+
 <script>
+audio_file.onchange = function(){
+    var files = this.files;
+    var file = URL.createObjectURL(files[0]); 
+    audio_player.src = file; 
+    audio_player.play();
+};
+    
 var canvas = document.querySelector('canvas'),
     ctx = canvas.getContext('2d');
-
-
-
-// here we create our chain
+    
 var audio = document.querySelector('audio'),
     audioContext = new AudioContext(),
     source = audioContext.createMediaElementSource(audio),
