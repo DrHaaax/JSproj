@@ -9,8 +9,6 @@
   
   <!-- Phaser.js library -->
   <script src="src/phaser.js"></script>
-  <!-- SoundAnalyse plugin -->
-  <script src="src/SoundAnalyse.js"></script>
 </head>
 
 <body>
@@ -32,7 +30,7 @@
     function preload() {
     
     	// load SoundAnalyse plugin script file
-        //game.load.script('soundAnalysePlugin', 'src/SoundAnalyse.js');
+        this.load.script('soundAnalysePlugin', 'src/SoundAnalyse.js');
         
         // load song file
         this.load.audio('song1', 'assets/Devil_Trigger.mp3', true);
