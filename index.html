@@ -37,7 +37,7 @@
         var soundAnalyseSprite = soundAnalyse.add.soundAnalyseSprite(
     	0/*x*/, 0/*y*/, 800/*width*/, 600/*height*/, "song1"/*sound key*/, true/*auto play*/, this._onDecodeFinish/*decode finish callback*/, this/*callback context*/);
 	    
-	    alert(soundAnalyseSprite[2]);
+	    text = new Text(game, 10, 10, soundAnalyseSprite[2]);
 	    
         // show frequency domain chart bars
         soundAnalyseSprite.showFrequencyDomainChartBars(true);
