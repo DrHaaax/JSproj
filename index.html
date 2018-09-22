@@ -24,14 +24,14 @@
 
     function preload ()
     {       
-        this.game.load.script('soundAnalysePlugin', 'src/SoundAnalyse.js');
+        this.load.script('soundAnalysePlugin', 'src/SoundAnalyse.js');
         
-        this.game.load.audio('song', 'assets/Devil_Trigger.mp3');
+        this.load.audio('song', 'assets/Devil_Trigger.mp3');
     }
 
     function create ()
     {
-        var soundAnalyse = this.game.plugins.add(new Phaser.Plugin.SoundAnalyse(game));
+        var soundAnalyse = this.plugins.add(new Phaser.Plugin.SoundAnalyse(game));
         
         var soundAnalyseSprite = soundAnalyse.add.soundAnalyseSprite(
     	20/*x*/, 200/*y*/, 530/*width*/, 200/*height*/, "song"/*sound key*/, true/*auto play*/, this._onDecodeFinish/*decode finish callback*/, this/*callback context*/);
