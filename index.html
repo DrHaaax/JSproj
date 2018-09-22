@@ -43,7 +43,7 @@
     function create() {
 
         // create plugin instance
-        var soundAnalyse = this.plugins.add(new Phaser.Plugin.SoundAnalyse(game));
+        var soundAnalyse = this.plugins.add(new Phaser.Plugin.SoundAnalyse(this));
         
         // create new Sprite sound analyse object
         var soundAnalyseSprite = soundAnalyse.add.soundAnalyseSprite(
