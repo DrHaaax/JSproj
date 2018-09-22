@@ -1,44 +1,48 @@
+<!doctype html>
+
+<html lang="en">
 <head>
-    <script src="src/phaser.min.js"></script>
+  <meta charset="utf-8">
+  <title>Phaser - Sound Analyse</title>
+  <meta name="description" content="Example use of Phaser SoundAnalyse plugin">
+  <meta name="author" content="SoundAnalyse">
+  
+  <!-- Phaser.js library -->
+  <script src="js/lib/phaser.js"></script>
 </head>
+
 <body>
 
-    <script>
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 200 }
-            }
-        },
-        scene: {
-            preload: preload,
-            create: create
-        }
-    };
+  <script>
+  	// create new Phaser game
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
-    var game = new Phaser.Game(config);
-
-    function preload ()
-    {       
-        this.load.script('soundAnalysePlugin', 'src/SoundAnalyse.js');
+	// function called on game asset preload
+    function preload() {
+    
+    	// load SoundAnalyse plugin script file
+        game.load.script('soundAnalysePlugin', 'js/plugin/SoundAnalyse/SoundAnalyse.js');
         
-        this.load.audio('song', 'assets/Devil_Trigger.mp3');
+        // load song file
+        game.load.audio('song1', 'audio/All_Time_Low__Time_Bomb.mp3', true);
+        
     }
 
-    function create ()
-    {
-        var soundAnalyse = this.plugins.add(new Phaser.Plugin.SoundAnalyse(game));
+	// function called after all assets are loaded
+    function create() {
+
+        // create plugin instance
+        var soundAnalyse = game.plugins.add(new Phaser.Plugin.SoundAnalyse(game));
         
+        // create new Sprite sound analyse object
         var soundAnalyseSprite = soundAnalyse.add.soundAnalyseSprite(
-    	20/*x*/, 200/*y*/, 530/*width*/, 200/*height*/, "song"/*sound key*/, true/*auto play*/, this._onDecodeFinish/*decode finish callback*/, this/*callback context*/);
+    	20/*x*/, 200/*y*/, 530/*width*/, 200/*height*/, "song1"/*sound key*/, true/*auto play*/, this._onDecodeFinish/*decode finish callback*/, this/*callback context*/);
         
+        // show frequency domain chart bars
         soundAnalyseSprite.showFrequencyDomainChartBars(true);
-        
-    }
-    </script>
 
+    }
+  </script>
+  
 </body>
+</html>
