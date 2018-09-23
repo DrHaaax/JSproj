@@ -76,12 +76,12 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 60 && used == false) {
+	if (freq > 80 && used == false) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 	}
-	else if (freq < 60 && used == true) {
+	else if (freq < 80 && used == true) {
 		used = false;
 	}
 	console.log(used);
@@ -94,5 +94,4 @@ function avg(allFreq) {
 	}
 	var avg = total / allFreq.length;
 	return avg;
-	console.log(avg);
 }
