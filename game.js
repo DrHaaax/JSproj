@@ -47,8 +47,10 @@ function draw() {
     
     for (var i = 0; i < freqByteData.length; i += 20){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
-        ctx.fillRect(i + canvas.width / freqByteData.length / 20, (-1) * canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, (-1) * canvas.height);
-        ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
+        /*ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
+        ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
+		ctx.fillRect(i + 0, 0 + freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
+        ctx.strokeRect(i + 0, 0 + freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
     }
 	checkFreqHeight(avg(freqByteData));	
 }
