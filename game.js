@@ -43,10 +43,10 @@ function draw() {
         circles[i].draw();
     }
     
-    for (var i = 1; i < freqByteData.length; i += 10){
+    for (var i = 1; i < freqByteData.length; i += 20){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
-        ctx.fillRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
-        ctx.strokeRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
+        ctx.fillRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length, canvas.height);
+        ctx.strokeRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length, canvas.height);
     }
 }
 
@@ -57,7 +57,7 @@ function getRandomColor(){
 function Circle() {
     this.x = random() * canvas.width;
     this.y = random() * canvas.height;
-    this.radius = random() * 2;
+    this.radius = random() * 100 + 50;
     this.color = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';    
 }
 
