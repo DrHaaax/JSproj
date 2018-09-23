@@ -45,8 +45,8 @@ function draw() {
     
     for (var i = 1; i < freqByteData.length; i += 10){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
-        ctx.fillRect(i + 300, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
-        ctx.strokeRect(i + 300, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
+        ctx.fillRect((-1) * i + 300, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
+        ctx.strokeRect((-1) * i + 300, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
     }
 }
 
