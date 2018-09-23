@@ -2,6 +2,9 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 used = false;
 
+ctx.fillStyle = "green";
+ctx.fillRect(0, 0, 100, 100);
+
 window.onload = function() {
     canvas = document.createElement('canvas');
     canvas.width = 400;
