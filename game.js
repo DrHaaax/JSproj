@@ -1,6 +1,6 @@
 var analyser, canvas, ctx, random = Math.random, circles = [];
 
-var used = false;
+used = false;
 
 window.onload = function() {
     canvas = document.createElement('canvas');
