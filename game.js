@@ -21,7 +21,7 @@ function setupWebAudio() {
     audio.src = 'assets/Devil_Trigger.mp3';
     audio.controls = 'true';
     document.body.appendChild(audio);
-    audio.style.width = window.innerWidth + 'px';
+    audio.style.width = canvas.width + 'px';
     
     var audioContext = new AudioContext();
     analyser = audioContext.createAnalyser();
@@ -38,7 +38,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     for (var i = 1; i < circles.length; i++) {
-        circles[i].radius = freqByteData[i] * 2;
+        circles[i].radius = freqByteData[i]/* * 2*/;
         circles[i].y = circles[i].y > canvas.height ? 0 : circles[i].y + 1;
         circles[i].draw();
     }
