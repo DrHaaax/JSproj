@@ -81,7 +81,7 @@ function checkFreqHeight(freq) {
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 	}
-	else if (/*freq < 60 && */used == true) {
+	else if (freq < 60 && used == true) {
 		used = false;
 	}
 	console.log(used);
