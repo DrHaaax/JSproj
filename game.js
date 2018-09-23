@@ -52,8 +52,8 @@ function draw() {
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
         /*ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
-		ctx.fillRect(i, freqByteData[i], canvas.width / freqByteData.length * 25, canvas.height);
-        ctx.strokeRect(i, freqByteData[i], canvas.width / freqByteData.length * 25, canvas.height);
+		ctx.fillRect(i, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
+        ctx.strokeRect(i, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
     }
 	checkFreqHeight(avg(freqByteData));	
 }
