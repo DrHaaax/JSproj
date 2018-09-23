@@ -8,9 +8,6 @@ window.onload = function() {
     canvas.height = 800;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
-	
-	ctx.fillStyle = "green";
-	ctx.fillRect(0, 0, 100, 100);
     
     setupWebAudio();
     
@@ -41,6 +38,9 @@ function draw() {
     var freqByteData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqByteData);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	ctx.fillStyle = "green";
+	ctx.fillRect(0, 0, 100, 100);
     
     for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 10;
