@@ -84,7 +84,7 @@ function checkFreqHeight(freq) {
 	else if (/*freq < 60 && */used == true) {
 		used = false;
 	}
-	console.log(used + ' ' + avg);
+	console.log(used);
 }
 
 function avg(allFreq) {
@@ -94,4 +94,5 @@ function avg(allFreq) {
 	}
 	var avg = total / allFreq.length;
 	return avg;
+	console.log(avg);
 }
