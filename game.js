@@ -37,18 +37,19 @@ function draw() {
     analyser.getByteFrequencyData(freqByteData);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    for (var i = 1; i < circles.length; i++) {
+    for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 10;
         circles[i].y = circles[i].y > canvas.height ? 0 : circles[i].y + 1;
         circles[i].draw();
     }
     
-    for (var i = 1; i < freqByteData.length; i += 20){
+    for (var i = 0; i < freqByteData.length; i += 20){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
         ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
-		checkFreqHeight(freqByteData[200]);
+		//if (avg(freqByteData) > 100)
     }
+checkFreqHeight(freqByteData[0]);
 }
 
 function getRandomColor(){
@@ -74,8 +75,17 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 100) {
+	if (freq > 200) {
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 	}
 }
+
+/*function avg(allFreq) {
+	var total = 0;
+	for(var i = 0; i < allFreq.length; i++) {
+    total += grades[i];
+	}
+	var avg = total / allFreq.length;
+	return avg;
+}*/
