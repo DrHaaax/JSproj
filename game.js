@@ -1,5 +1,7 @@
 var analyser, canvas, ctx, random = Math.random, circles = [];
 
+var used = false;
+
 window.onload = function() {
     canvas = document.createElement('canvas');
     canvas.width = 400;
@@ -32,7 +34,7 @@ function setupWebAudio() {
 }
 
 function draw() {
-    requestAnimationFrame(draw);
+	requestAnimationFrame(draw);
     var freqByteData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqByteData);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -49,7 +51,9 @@ function draw() {
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
 		//if (avg(freqByteData) > 100)
     }
-checkFreqHeight(freqByteData[0]);
+	if (
+	checkFreqHeight(freqByteData[0]);
+	
 }
 
 function getRandomColor(){
@@ -75,9 +79,13 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 200) {
+	if (freq > 200 && used == false) {
+		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
+	}
+	else {
+		used = false;
 	}
 }
 
