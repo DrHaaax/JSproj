@@ -89,7 +89,7 @@ function checkFreqHeight(freq) {
 function avg(allFreq) {
 	var total = 0;
 	for(var i = 0; i < allFreq.length; i++) {
-    total += grades[i];
+    total += allFreq[i];
 	}
 	var avg = total / allFreq.length;
 	return avg;
