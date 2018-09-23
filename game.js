@@ -2,8 +2,8 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 window.onload = function() {
     canvas = document.createElement('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = 600;
+    canvas.height = 1200;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
     
@@ -45,8 +45,8 @@ function draw() {
     
     for (var i = 1; i < freqByteData.length; i += 10){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
-        ctx.fillRect(i + 300, (-1) * canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
-        ctx.strokeRect(i + 300, (-1) * canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
+        ctx.fillRect(i + 300, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
+        ctx.strokeRect(i + 300, canvas.height - freqByteData[i] * 1.5, 10, canvas.height);
     }
 }
 
