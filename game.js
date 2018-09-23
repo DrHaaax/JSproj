@@ -2,7 +2,7 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 window.onload = function() {
     canvas = document.createElement('canvas');
-    canvas.width = 400;
+    canvas.width = 800;
     canvas.height = 800;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
