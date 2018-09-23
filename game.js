@@ -2,15 +2,15 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 used = false;
 
-ctx.fillStyle = "green";
-ctx.fillRect(0, 0, 100, 100);
-
 window.onload = function() {
     canvas = document.createElement('canvas');
     canvas.width = 400;
     canvas.height = 800;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
+	
+	ctx.fillStyle = "green";
+	ctx.fillRect(0, 0, 100, 100);
     
     setupWebAudio();
     
