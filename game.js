@@ -31,7 +31,7 @@ function setupWebAudio() {
     audio.play();
 	
 	var sound = document.createElement('sound');
-	audio.src = 'assets/sound.mp3';
+	sound.src = 'assets/sound.mp3';
 }
 
 function draw() {
