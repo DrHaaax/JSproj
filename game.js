@@ -45,8 +45,8 @@ function draw() {
     
     for (var i = 1; i < freqByteData.length; i += 20){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
-        ctx.fillRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 20, canvas.height);
-        ctx.strokeRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 20, canvas.height);
+        ctx.fillRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 30, canvas.height);
+        ctx.strokeRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 30, canvas.height);
     }
 }
 
