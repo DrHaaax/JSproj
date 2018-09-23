@@ -80,12 +80,11 @@ function checkFreqHeight(freq) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
-		console.log(used);
 	}
 	else if (/*freq < 60 && */used == true) {
 		used = false;
-		console.log(used);
 	}
+	console.log(used + ' ' + avg);
 }
 
 function avg(allFreq) {
