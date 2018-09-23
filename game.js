@@ -76,7 +76,7 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 80 && used == false) {
+	if (freq > 60 && used == false) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
