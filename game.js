@@ -38,9 +38,6 @@ function draw() {
     var freqByteData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqByteData);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-	
-	ctx.fillStyle = "green";
-	ctx.fillRect(0, 0, 100, 100);
     
     for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 10;
@@ -52,8 +49,8 @@ function draw() {
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
         /*ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
-		ctx.fillRect(i, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
-        ctx.strokeRect(i, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
+		ctx.fillRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
+        ctx.strokeRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
     }
 	checkFreqHeight(avg(freqByteData));	
 }
@@ -85,6 +82,8 @@ function checkFreqHeight(freq) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
+		ctx.fillStyle = "red";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
 	else if (freq < 80 && used == true) {
 		used = false;
