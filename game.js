@@ -82,7 +82,7 @@ function checkFreqHeight(freq) {
 		sound.play();
 		console.log(used);
 	}
-	else if (freq < 60 && used == true) {
+	else if (/*freq < 60 && */used == true) {
 		used = false;
 		console.log(used);
 	}
