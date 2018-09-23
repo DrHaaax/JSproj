@@ -45,7 +45,7 @@ function draw() {
         circles[i].draw();
     }
     
-    for (var i = 1; i < freqByteData.length; i += 1){
+    for (var i = 1; i < 10; i += 1){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
         ctx.fillRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 30, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 30, canvas.height);
