@@ -38,6 +38,9 @@ function draw() {
     var freqByteData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqByteData);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 10;
@@ -47,10 +50,14 @@ function draw() {
     
     for (var i = 0; i < freqByteData.length; i += 20){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
+		
+		//from bottom to top
         /*ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
+		
+		//from top to bottom
 		ctx.fillRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
-        ctx.strokeRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
+        //ctx.strokeRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
     }
 	checkFreqHeight(avg(freqByteData));	
 }
