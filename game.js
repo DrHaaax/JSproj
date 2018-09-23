@@ -29,9 +29,6 @@ function setupWebAudio() {
     source.connect(analyser);
     analyser.connect(audioContext.destination);
     audio.play();
-	
-	var sound = document.createElement('sound');
-	sound.src = 'assets/sound.mp3';
 }
 
 function draw() {
@@ -77,6 +74,8 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 200)
+	if (freq > 200) {
+		var sound = new Audio('assets/sound.mp3');
 		sound.play();
+	}
 }
