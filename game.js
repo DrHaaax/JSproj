@@ -57,7 +57,7 @@ function getRandomColor(){
 function Circle() {
     this.x = random() * canvas.width;
     this.y = random() * canvas.height;
-    this.radius = random() * 10;
+    this.radius = random() * 2;
     this.color = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';    
 }
 
