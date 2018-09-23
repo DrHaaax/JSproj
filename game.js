@@ -49,8 +49,7 @@ function draw() {
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
         ctx.fillRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 30, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 30, canvas.height);
-		if (freqByteData[i] > 200)
-			sound.play();
+		checkFreqHeight(freqByteData[i]);
     }
 }
 
@@ -74,4 +73,9 @@ Circle.prototype.draw = function() {
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.restore();
+}
+
+function checkFreqHeight(freq) {
+	if (freq > 200)
+		sound.play();
 }
