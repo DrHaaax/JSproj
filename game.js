@@ -80,9 +80,11 @@ function checkFreqHeight(freq) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
+		console.log('выше');
 	}
 	else {
 		used = false;
+		console.log('ниже');
 	}
 }
 
