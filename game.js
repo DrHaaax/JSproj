@@ -30,7 +30,8 @@ function setupWebAudio() {
     analyser.connect(audioContext.destination);
     audio.play();
 	
-	var sound = new Audio('assets/sound.mp3');
+	var sound = document.createElement('sound');
+	audio.src = 'assets/sound.mp3';
 }
 
 function draw() {
