@@ -11,7 +11,15 @@ used = false;
 		url: 'assets/Devil_Trigger.mp3'});*/
 
 window.onload = function() {
-    canvas = document.createElement('canvas');
+	
+	var file = document.getElementById("thefile");
+	var audio = document.getElementById("audio");
+	
+	file.onchange = function() {
+	
+	var files = this.files;
+    
+	canvas = document.createElement('canvas');
     canvas.width = 400;
     canvas.height = 800;
     document.body.appendChild(canvas);
@@ -24,12 +32,13 @@ window.onload = function() {
         circles[i].draw();
     }
     draw();
+	}
 };
 
 function setupWebAudio() {
     var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
-	audio.src = document.getElementById('thefile').files[0];
+	audio.src = URL.createObjectURL(files[0]);
     audio.controls = 'true';
     document.body.appendChild(audio);
     audio.style.width = canvas.width + 'px';
