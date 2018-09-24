@@ -2,6 +2,14 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 used = false;
 
+	//initialization of beatDetector
+	var song = new stasilo.BeatDetector({
+		sens: 5.0, 
+		visualizerFFTSize: 256, 
+		analyserFFTSize: 256, 
+		passFreq: 600,
+		url: audio.src}); 
+
 window.onload = function() {
     canvas = document.createElement('canvas');
     canvas.width = 400;
@@ -24,14 +32,6 @@ function setupWebAudio() {
     audio.controls = 'true';
     document.body.appendChild(audio);
     audio.style.width = canvas.width + 'px';
-	
-	//initialization of beatDetector
-	var song = new stasilo.BeatDetector({
-		sens: 5.0, 
-		visualizerFFTSize: 256, 
-		analyserFFTSize: 256, 
-		passFreq: 600,
-		url: audio.src}); 
     
     var audioContext = new AudioContext();
     analyser = audioContext.createAnalyser();
