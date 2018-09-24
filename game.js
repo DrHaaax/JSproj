@@ -2,11 +2,6 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 used = false;
 
-var grd = ctx.createLinearGradient(0,0,300,0);
-grd.addColorStop(0,"green");
-grd.addColorStop(0.5,"yellow");
-grd.addColorStop(1,"red");
-
 	//initialization of beatDetector
 	/*var song = new stasilo.BeatDetector({
 		sens: 4, 
@@ -29,6 +24,11 @@ window.onload = function() {
     canvas.height = 800;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
+	
+	grd = ctx.createLinearGradient(0,0,300,0);
+	grd.addColorStop(0,"green");
+	grd.addColorStop(0.5,"yellow");
+	grd.addColorStop(1,"red");
     
     setupWebAudio(files);
     
