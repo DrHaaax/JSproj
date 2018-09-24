@@ -77,7 +77,7 @@ function draw() {
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
 		
 		//from top to bottom
-		ctx.fillRect(i + 20, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
+		ctx.fillRect(i * 20, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
         //ctx.strokeRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
     }
 	checkFreqHeight(freqAvg(freqByteData));	
