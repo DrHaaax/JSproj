@@ -65,9 +65,9 @@ function draw() {
 	checkFreqHeight(freqAvg(freqByteData));	
 }
 
-/*function getRandomColor(){
+function getRandomColor(){
     return random() * 255 >> 0;
-}*/
+}
 
 function Circle() {
     this.x = random() * canvas.width;
