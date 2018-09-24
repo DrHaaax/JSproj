@@ -130,7 +130,7 @@ function checkFreqHeight(freq) {
 
 function freqAvg(allFreq) {
 	var total = 0;
-	for(var i = 0; i < allFreq.length; i++) {
+	for(var i = 5; i < allFreq.length; i++) {
     total += allFreq[i];
 	}
 	var avg = total / allFreq.length;
