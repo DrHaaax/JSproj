@@ -25,7 +25,7 @@ window.onload = function() {
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
 	
-	grd = ctx.createLinearGradient(0,0,0,300);
+	grd = ctx.createLinearGradient(0,0,0,200);
 	grd.addColorStop(0,"green");
 	grd.addColorStop(0.5,"yellow");
 	grd.addColorStop(1,"red");
