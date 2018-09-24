@@ -14,16 +14,16 @@ window.onload = function() {
 	
 	var file = document.getElementById("thefile");
 	var audio = document.getElementById("audio");
-	
-	file.onchange = function() {
-	
-	var files = this.files;
     
 	canvas = document.createElement('canvas');
     canvas.width = 400;
     canvas.height = 800;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
+	
+	file.onchange = function() {
+	
+	var files = this.files;
     
     setupWebAudio(files);
     
