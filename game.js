@@ -44,7 +44,7 @@ function setupWebAudio(files) {
     audio.style.width = canvas.width + 'px';*/
 	
 	//initialization of beatDetector
-	var song = new stasilo.BeatDetector({
+	var audio = new stasilo.BeatDetector({
 		sens: 4, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
@@ -59,8 +59,7 @@ function setupWebAudio(files) {
     var source = audioContext.createMediaElementSource(audio);
     source.connect(analyser);
     analyser.connect(audioContext.destination);
-    //audio.play();
-	song.play();
+    audio.play();
 }
 
 function draw() {
