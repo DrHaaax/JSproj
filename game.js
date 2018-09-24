@@ -45,6 +45,9 @@ function setupWebAudio(files) {
     
     var audioContext = new AudioContext();
     analyser = audioContext.createAnalyser();
+	
+	analyser.fftSize = 256;
+	
     var source = audioContext.createMediaElementSource(audio);
     source.connect(analyser);
     analyser.connect(audioContext.destination);
