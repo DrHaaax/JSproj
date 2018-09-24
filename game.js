@@ -8,7 +8,7 @@ used = false;
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
 		passFreq: 600,
-		url: audio.src}); 
+		url: 'assets/Devil_Trigger.mp3'}); 
 
 window.onload = function() {
     canvas = document.createElement('canvas');
