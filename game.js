@@ -77,7 +77,7 @@ function draw() {
         circles[i].draw();
     }
     
-    for (var i = 0; i < freqByteData.length; i += 10){
+    for (var i = 0; i < freqByteData.length; i += 1){
         ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
 		
 		//from bottom to top
