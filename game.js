@@ -53,13 +53,12 @@ window.onload = function() {
 
 //for beatDetector
 function setupWebAudio(files) {
-	var audio = new stasilo.BeatDetector({
+	audio = new stasilo.BeatDetector({
 		sens: 4, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
 		passFreq: 600,
 		url: URL.createObjectURL(files[0])});
-	freqByteData = 	audio.getAudioFreqData();
 }
 
 function draw() {
@@ -77,6 +76,8 @@ function draw() {
         circles[i].draw();
     }
     
+	var freqByteData = audio.getAudioFreqData(); //
+	
     for (var i = 0; i < freqByteData.length; i += 1){
         //ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
 		ctx.fillStyle = grd;
