@@ -87,19 +87,6 @@ Circle.prototype.draw = function() {
     ctx.restore();
 }
 
-/*function checkFreqHeight(freq) {
-	if (freq > 120 && used == false) {
-		used = true;
-		var sound = new Audio('assets/sound.mp3');
-		sound.play();
-		ctx.fillStyle = "red";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
-	}
-	else if (freq < 120 && used == true) {
-		used = false;
-	}
-}*/
-
 //for beatDetector
 function checkFreqHeight(freq) {
 	if (audio.isOnBeat()) {
