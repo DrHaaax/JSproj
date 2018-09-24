@@ -4,7 +4,7 @@ used = false;
 
 	//initialization of beatDetector
 	var song = new stasilo.BeatDetector({
-		sens: 4.5, 
+		sens: 4, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
 		passFreq: 600,
