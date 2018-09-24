@@ -2,14 +2,6 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 used = false;
 
-	//initialization of beatDetector
-	var song = new stasilo.BeatDetector({
-		sens: 4, 
-		visualizerFFTSize: 256, 
-		analyserFFTSize: 256, 
-		passFreq: 600,
-		url: 'assets/Devil_Trigger.mp3'});
-
 window.onload = function() {
 	
 	var file = document.getElementById("thefile");
@@ -40,7 +32,7 @@ window.onload = function() {
 	}
 };
 
-function setupWebAudio(files) {
+/*function setupWebAudio(files) {
     var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
 	audio.src = URL.createObjectURL(files[0]);
@@ -57,6 +49,16 @@ function setupWebAudio(files) {
     source.connect(analyser);
     analyser.connect(audioContext.destination);
     audio.play();
+}*/
+
+//for beatDetector
+function setupWebAudio(files) {
+	var audio = new stasilo.BeatDetector({
+		sens: 4, 
+		visualizerFFTSize: 256, 
+		analyserFFTSize: 256, 
+		passFreq: 600,
+		url: URL.createObjectURL(files[0])});
 }
 
 function draw() {
