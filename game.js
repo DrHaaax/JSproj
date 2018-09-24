@@ -134,7 +134,6 @@ function freqAvg(allFreq) {
     total += allFreq[i];
 	}
 	var avg = total / allFreq.length;
-	return avg;
-	
 	console.log(avg);
+	return avg;
 }
