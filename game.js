@@ -54,7 +54,7 @@ window.onload = function() {
 //for beatDetector
 function setupWebAudio(files) {
 	audio = new stasilo.BeatDetector({
-		sens: 4, 
+		sens: 5, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
 		passFreq: 600,
