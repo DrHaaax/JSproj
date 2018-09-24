@@ -24,6 +24,14 @@ function setupWebAudio() {
     audio.controls = 'true';
     document.body.appendChild(audio);
     audio.style.width = canvas.width + 'px';
+	
+	//initialization of beatDetector
+	var song = new stasilo.BeatDetector({
+		sens: 5.0, 
+		visualizerFFTSize: 256, 
+		analyserFFTSize: 256, 
+		passFreq: 600,
+		url: audio.src}); 
     
     var audioContext = new AudioContext();
     analyser = audioContext.createAnalyser();
@@ -84,7 +92,7 @@ Circle.prototype.draw = function() {
     ctx.restore();
 }
 
-function checkFreqHeight(freq) {
+/*function checkFreqHeight(freq) {
 	if (freq > 80 && used == false) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
@@ -96,6 +104,15 @@ function checkFreqHeight(freq) {
 		used = false;
 	}
 	console.log(used);
+}*/
+
+function checkFreqHeight(freq) {
+	if (song.isOnBeat()) {
+		var sound = new Audio('assets/sound.mp3');
+		sound.play();
+		ctx.fillStyle = "red";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+	}
 }
 
 function avg(allFreq) {
