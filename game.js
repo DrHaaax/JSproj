@@ -62,7 +62,7 @@ function draw() {
 		ctx.fillRect(i * 10, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
         ctx.strokeRect(i * 10, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
     }
-	//checkFreqHeight(freqAvg(freqByteData));	
+	checkFreqHeight(/*freqAvg(freqByteData)*/);	
 }
 
 function getRandomColor(){
