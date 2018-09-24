@@ -32,25 +32,6 @@ window.onload = function() {
 	}
 };
 
-/*function setupWebAudio(files) {
-    var audio = document.createElement('audio');
-    //audio.src = 'assets/Devil_Trigger.mp3';
-	audio.src = URL.createObjectURL(files[0]);
-    audio.controls = 'true';
-    document.body.appendChild(audio);
-    audio.style.width = canvas.width + 'px';
-    
-    var audioContext = new AudioContext();
-    analyser = audioContext.createAnalyser();
-	
-	analyser.fftSize = 256;
-	
-    var source = audioContext.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-    audio.play();
-}*/
-
 //for beatDetector
 function setupWebAudio(files) {
 	audio = new stasilo.BeatDetector({
@@ -63,14 +44,11 @@ function setupWebAudio(files) {
 
 function draw() {
 	requestAnimationFrame(draw);
-    /*var freqByteData = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(freqByteData);*/
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	
+    ctx.clearRect(0, 0, canvas.width, canvas.height);	
 	ctx.fillStyle = "black";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
-	var freqByteData = audio.getAudioFreqData(); //
+	var freqByteData = audio.getAudioFreqData(); //beatDetector
     
     for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 10;
@@ -81,20 +59,15 @@ function draw() {
     for (var i = 0; i < freqByteData.length; i += 1){
         //ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
 		ctx.fillStyle = grd;
-		//from bottom to top
-        /*ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
-        ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
-		
-		//from top to bottom
 		ctx.fillRect(i * 10, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
-        //ctx.strokeRect(i + 2, 0, canvas.width / freqByteData.length * 25, freqByteData[i]);
+        ctx.strokeRect(i * 10, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
     }
 	checkFreqHeight(freqAvg(freqByteData));	
 }
 
-function getRandomColor(){
+/*function getRandomColor(){
     return random() * 255 >> 0;
-}
+}*/
 
 function Circle() {
     this.x = random() * canvas.width;
