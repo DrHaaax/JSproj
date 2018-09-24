@@ -3,12 +3,12 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 used = false;
 
 	//initialization of beatDetector
-	/*var song = new stasilo.BeatDetector({
+	var song = new stasilo.BeatDetector({
 		sens: 4, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
 		passFreq: 600,
-		url: 'assets/Devil_Trigger.mp3'});*/
+		url: 'assets/Devil_Trigger.mp3'});
 
 window.onload = function() {
 	
@@ -110,7 +110,7 @@ Circle.prototype.draw = function() {
     ctx.restore();
 }
 
-function checkFreqHeight(freq) {
+/*function checkFreqHeight(freq) {
 	if (freq > 120 && used == false) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
@@ -121,17 +121,17 @@ function checkFreqHeight(freq) {
 	else if (freq < 120 && used == true) {
 		used = false;
 	}
-}
+}*/
 
 //for beatDetector
-/*function checkFreqHeight(freq) {
+function checkFreqHeight(freq) {
 	if (song.isOnBeat()) {
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 		ctx.fillStyle = "red";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
-}*/
+}
 
 function freqAvg(allFreq) {
 	var total = 0;
