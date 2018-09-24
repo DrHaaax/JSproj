@@ -35,7 +35,7 @@ window.onload = function() {
 	}
 };
 
-function setupWebAudio(afiles) {
+function setupWebAudio(files) {
     var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
 	audio.src = URL.createObjectURL(files[0]);
