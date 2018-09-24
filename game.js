@@ -128,7 +128,7 @@ Circle.prototype.draw = function() {
 
 //for beatDetector
 function checkFreqHeight(freq) {
-	if (song.isOnBeat()) {
+	if (audio.isOnBeat()) {
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 		ctx.fillStyle = "red";
