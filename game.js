@@ -39,7 +39,7 @@ function setupWebAudio(files) {
     var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
 	audio.src = URL.createObjectURL(files[0]);
-    audio.controls = 'true';
+    //audio.controls = 'true';
     document.body.appendChild(audio);
     audio.style.width = canvas.width + 'px';
     
