@@ -111,14 +111,14 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 230 && used == false) {
+	if (freq > 120 && used == false) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 		ctx.fillStyle = "red";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
-	else if (freq < 230 && used == true) {
+	else if (freq < 120 && used == true) {
 		used = false;
 	}
 }
@@ -138,8 +138,7 @@ function freqAvg(allFreq) {
 	for(var i = 0; i < allFreq.length; i++) {
     total += allFreq[i];
 	}
-	//var avg = total / allFreq.length;
-	avg = allFreq[2]; //удалить
+	var avg = total / allFreq.length;
 	console.log(avg);
 	return avg;
 }
