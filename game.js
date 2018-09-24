@@ -36,15 +36,15 @@ window.onload = function() {
 };
 
 function setupWebAudio(files) {
-    /*var audio = document.createElement('audio');
+    var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
 	audio.src = URL.createObjectURL(files[0]);
     audio.controls = 'true';
     document.body.appendChild(audio);
-    audio.style.width = canvas.width + 'px';*/
+    audio.style.width = canvas.width + 'px';
 	
 	//initialization of beatDetector
-	var audio = new stasilo.BeatDetector({
+	var song = new stasilo.BeatDetector({
 		sens: 4, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
