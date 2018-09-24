@@ -139,7 +139,7 @@ function freqAvg(allFreq) {
     total += allFreq[i];
 	}
 	//var avg = total / allFreq.length;
-	avg = allFreq[3]; //удалить
+	avg = allFreq[2]; //удалить
 	console.log(avg);
 	return avg;
 }
