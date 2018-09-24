@@ -2,6 +2,11 @@ var analyser, canvas, ctx, random = Math.random, circles = [];
 
 used = false;
 
+var grd = ctx.createLinearGradient(0,0,300,0);
+grd.addColorStop(0,"green");
+grd.addColorStop(0.5,"yellow");
+grd.addColorStop(1,"red");
+
 	//initialization of beatDetector
 	/*var song = new stasilo.BeatDetector({
 		sens: 4, 
@@ -70,8 +75,8 @@ function draw() {
     }
     
     for (var i = 0; i < freqByteData.length; i += 1){
-        ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
-		
+        //ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
+		ctx.fillStyle = grd;
 		//from bottom to top
         /*ctx.fillRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);
         ctx.strokeRect(i + canvas.width / freqByteData.length / 20, canvas.height - freqByteData[i] * 1.5, canvas.width / freqByteData.length * 25, canvas.height);*/
@@ -130,7 +135,7 @@ function checkFreqHeight(freq) {
 
 function freqAvg(allFreq) {
 	var total = 0;
-	for(var i = 5; i < allFreq.length; i++) {
+	for(var i = 0; i < allFreq.length; i++) {
     total += allFreq[i];
 	}
 	var avg = total / allFreq.length;
