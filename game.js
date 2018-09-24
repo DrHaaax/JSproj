@@ -116,7 +116,6 @@ function checkFreqHeight(freq) {
 	else if (freq < 75 && used == true) {
 		used = false;
 	}
-	console.log(avg);
 }
 
 //for beatDetector
@@ -136,4 +135,6 @@ function freqAvg(allFreq) {
 	}
 	var avg = total / allFreq.length;
 	return avg;
+	
+	console.log(avg);
 }
