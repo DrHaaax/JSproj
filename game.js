@@ -69,14 +69,14 @@ function draw() {
 	
 	ctx.fillStyle = "black";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	
+	var freqByteData = audio.getAudioFreqData(); //
     
     for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 10;
         circles[i].y = circles[i].y > canvas.height ? 0 : circles[i].y + 1;
         circles[i].draw();
     }
-    
-	var freqByteData = audio.getAudioFreqData(); //
 	
     for (var i = 0; i < freqByteData.length; i += 1){
         //ctx.fillStyle = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
