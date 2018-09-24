@@ -25,7 +25,7 @@ window.onload = function() {
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
     
-    setupWebAudio();
+    setupWebAudio(files);
     
     for (var i = 0; i < 20; i++) {
         circles[i] = new Circle();
@@ -35,7 +35,7 @@ window.onload = function() {
 	}
 };
 
-function setupWebAudio() {
+function setupWebAudio(afiles) {
     var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
 	audio.src = URL.createObjectURL(files[0]);
