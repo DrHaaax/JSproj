@@ -62,7 +62,7 @@ function draw() {
 		ctx.fillRect(i * 10, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
         ctx.strokeRect(i * 10, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
     }
-	checkFreqHeight(freqAvg(freqByteData));	
+	//checkFreqHeight(freqAvg(freqByteData));	
 }
 
 function getRandomColor(){
@@ -97,12 +97,11 @@ function checkFreqHeight(freq) {
 	}
 }
 
-function freqAvg(allFreq) {
+/*function freqAvg(allFreq) {
 	var total = 0;
 	for(var i = 0; i < allFreq.length; i++) {
     total += allFreq[i];
 	}
 	var avg = total / allFreq.length;
-	console.log(avg);
 	return avg;
-}
+}*/
