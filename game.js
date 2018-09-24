@@ -103,14 +103,14 @@ Circle.prototype.draw = function() {
 }
 
 function checkFreqHeight(freq) {
-	if (freq > 70 && used == false) {
+	if (freq > 75 && used == false) {
 		used = true;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
 		ctx.fillStyle = "red";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
-	else if (freq < 70 && used == true) {
+	else if (freq < 75 && used == true) {
 		used = false;
 	}
 	console.log(used);
