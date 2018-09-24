@@ -14,16 +14,16 @@ window.onload = function() {
 	
 	var file = document.getElementById("thefile");
 	var audio = document.getElementById("audio");
+	
+	file.onchange = function() {
+	
+	var files = this.files;
     
 	canvas = document.createElement('canvas');
     canvas.width = 400;
     canvas.height = 800;
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
-	
-	file.onchange = function() {
-	
-	var files = this.files;
     
     setupWebAudio(files);
     
@@ -39,7 +39,7 @@ function setupWebAudio(files) {
     var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
 	audio.src = URL.createObjectURL(files[0]);
-    //audio.controls = 'true';
+    audio.controls = 'true';
     document.body.appendChild(audio);
     audio.style.width = canvas.width + 'px';
     
