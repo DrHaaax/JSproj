@@ -27,9 +27,9 @@ window.onload = function() {
 };
 
 function setupWebAudio() {
-    //var audio = document.createElement('audio');
+    var audio = document.createElement('audio');
     //audio.src = 'assets/Devil_Trigger.mp3';
-	var audio = document.getElementById('audio');
+	audio.src = document.getElementById('input').files[0];
     audio.controls = 'true';
     document.body.appendChild(audio);
     audio.style.width = canvas.width + 'px';
