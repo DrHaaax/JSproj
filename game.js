@@ -59,12 +59,13 @@ function setupWebAudio(files) {
 		analyserFFTSize: 256, 
 		passFreq: 600,
 		url: URL.createObjectURL(files[0])});
+	freqByteData = 	audio.getAudioFreqData();
 }
 
 function draw() {
 	requestAnimationFrame(draw);
-    var freqByteData = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(freqByteData);
+    /*var freqByteData = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(freqByteData);*/
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	
 	ctx.fillStyle = "black";
