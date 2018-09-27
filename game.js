@@ -124,6 +124,8 @@ function draw() {
 		ctx.fillStyle = "white";
 		ctx.textAlign = "left";
 		ctx.fillText("score: " + score, 5, 25);
+		ctx.font = "20px Arial";
+		ctx.fillText("shoot the red lasers on [1] [2] [3] [4] buttons", 5, canvas.height - 5);
 	} 
 }
 
