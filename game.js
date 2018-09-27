@@ -1,8 +1,12 @@
-var analyser, canvas, ctx, random = Math.random, circles = [];
+var analyser, canvas, ctx, random = Math.random, circles = [], ebullets = [], pbullets = [];
 
 used = false;
 
 reverse = false;
+
+idealscore = 0;
+
+score = 0;
 
 window.onload = function() {
 	
@@ -12,6 +16,8 @@ window.onload = function() {
 	file.onchange = function() {
 	
 	var files = this.files;
+	
+	document.getElementById("thefile").style.visibility = 'hidden';
     
 	canvas = document.createElement('canvas');
     canvas.width = 400;
@@ -19,10 +25,14 @@ window.onload = function() {
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
 	
-	grdCol = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3];
+	grdCol = [[0, 0.05, 1], ["green", "yellow", "red"]];
+	
+	ecanonpos = [50, 150, 250, 350];
     
     setupWebAudio(files);
-    
+	
+	document.addEventListener("keydown", keyDownHandler);
+	
     for (var i = 0; i < 20; i++) {
         circles[i] = new Circle();
         circles[i].draw();
@@ -50,8 +60,8 @@ function draw() {
 	var freqByteData = audio.getAudioFreqData(); //beatDetector
     
     for (var i = 0; i < circles.length; i++) {
-        circles[i].radius = freqByteData[i] / 10;
-        circles[i].y = circles[i].y > canvas.height ? 0 : circles[i].y + 1;
+        circles[i].radius = freqByteData[i] / 5;
+        circles[i].y = circles[i].y > canvas.height - 1 ? 0 : circles[i].y + 1;
 		circles[i].x = circles[i].y > canvas.height ? random() * canvas.width : circles[i].x; //maybe rework it, kinda mess
         circles[i].draw();
     }
@@ -60,13 +70,61 @@ function draw() {
 	
     for (var i = 0; i < freqByteData.length; i++){
 		ctx.fillStyle = shuffleGrd();
-		ctx.fillRect(x, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
-        ctx.strokeRect(x, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i]);
+		ctx.fillRect(x, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i] / 2);
+        ctx.strokeRect(x, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i] / 2);
 		
 		x += (canvas.width / freqByteData.length * 2.5) + 1;
     }
 	
 	checkFreqHeight();	
+	
+	for (var i = 0; i < ebullets.length; i++){		
+		if (ebullets[i].y >= canvas.height && ebullets[i].destroyed == false){
+			ebullets[i].destroyed = true;
+			score -= 20;
+		}
+		
+		if (ebullets[i].destroyed == false){
+			
+			for (var j = 0; j < pbullets.length; j++){  //check collision between bullets
+			if (pbullets[j].x == ebullets[i].x && pbullets[j].y <= ebullets[i].y && pbullets[j].destroyed == false){
+				ebullets[i].destroyed = true;
+				pbullets[j].destroyed = true;
+				score += 10;
+			}
+		}
+			
+			ebullets[i].y += 10;
+			ctx.fillStyle = "red";
+			ctx.fillRect(ebullets[i].x, ebullets[i].y, 10, 30);
+		}
+	}
+	
+	for (var i = 0; i < pbullets.length; i++){
+		if (pbullets[i].y <= 0 && pbullets[i].destroyed == false){
+			pbullets[i].destroyed = true;
+			score -= 10;
+		}
+		
+		if (pbullets[i].destroyed == false){
+			pbullets[i].y -= 20;
+			ctx.fillStyle = "green";
+			ctx.fillRect(pbullets[i].x, pbullets[i].y, 10, 30);
+		}
+	}
+	
+	if (audio.isFinished() && ebullets[ebullets.length - 1].destroyed == true) {
+		ctx.font = "30px Arial";
+		ctx.fillStyle = "white";
+		ctx.textAlign = "center";
+		ctx.fillText("score: " + score, canvas.width / 2, canvas.height / 2);
+		ctx.fillText("ideal score: " + idealscore, canvas.width / 2, canvas.height / 2 + 50);
+	} else {
+		ctx.font = "30px Arial";
+		ctx.fillStyle = "white";
+		ctx.textAlign = "left";
+		ctx.fillText("score: " + score, 5, 25);
+	} 
 }
 
 function getRandomColor(){
@@ -84,7 +142,7 @@ Circle.prototype.draw = function() {
     var that = this;
     ctx.save();
     ctx.beginPath();
-    ctx.globalAlpha = random() / 3 + 0.2;
+    ctx.globalAlpha = /*random() / 3 + */ 0.2;
     ctx.arc(that.x, that.y, that.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.fill();
@@ -94,37 +152,59 @@ Circle.prototype.draw = function() {
 //for beatDetector
 function checkFreqHeight(freq) {
 	if (audio.isOnBeat()) {
+		idealscore += 10;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
-		ctx.fillStyle = "red";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		/*ctx.fillStyle = "red";
+		ctx.fillRect(canvas.width / 2, canvas.height / 2, 10, 10);*/
+		ebullets.push(new ebullet());
 	}
 }
 
 function shuffleGrd(){
-	if (grdCol[0] <= 0.01){
+	if (grdCol[0][1] <= 0.01){
 		reverse = false;
+		for (var i = 0; i < grdCol.length; i++){
+			grdCol[1][i] = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
 		}
-	if (grdCol[6] >= 0.99){
+	}
+	if (grdCol[0][1] >= 0.99){
 		reverse = true;
-		}
-	if (reverse == false){
 		for (var i = 0; i < grdCol.length; i++){
-		grdCol[i] += 0.00005;
+			grdCol[1][i] = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
 		}
 	}
-	else{
-		for (var i = 0; i < grdCol.length; i++){
-		grdCol[i] -= 0.00005;
-		}
-	}
+	grdCol[0][1] = reverse == false ? grdCol[0][1] + 0.00005 : grdCol[0][1] - 0.00005;
 	var grd = ctx.createLinearGradient(0,0,canvas.width,0);
-	grd.addColorStop(grdCol[0],"red");
-	grd.addColorStop(grdCol[1],"orange");
-	grd.addColorStop(grdCol[2],"yellow");
-	grd.addColorStop(grdCol[3],"green");
-	grd.addColorStop(grdCol[4],"blue");
-	grd.addColorStop(grdCol[5],"indigo");
-	grd.addColorStop(grdCol[6],"violet");
+	grd.addColorStop(grdCol[0][0],grdCol[1][0]);
+	grd.addColorStop(grdCol[0][1],grdCol[1][1]);
+	grd.addColorStop(grdCol[0][2],grdCol[1][2]);
 	return grd;
+}
+
+function ebullet() {
+	this.x = ecanonpos[Math.floor(Math.random() * ecanonpos.length)];
+	this.y = 0;
+    this.destroyed = false;
+}
+
+function pbullet(x) {
+	this.x = x;
+	this.y = canvas.height;
+    this.destroyed = false;
+}
+
+function keyDownHandler(e) {
+    if(e.keyCode == 49) {
+		pbullets.push(new pbullet(ecanonpos[0]));
+    }
+	if(e.keyCode == 50) {
+		pbullets.push(new pbullet(ecanonpos[1]));
+    }
+	if(e.keyCode == 51) {
+		pbullets.push(new pbullet(ecanonpos[2]));
+    }
+	if(e.keyCode == 52) {
+		pbullets.push(new pbullet(ecanonpos[3]));
+    }
 }
