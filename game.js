@@ -8,26 +8,40 @@ idealscore = 0;
 
 score = 0;
 
+h = window.innerHeight;
+w = h / 2;
+
 window.onload = function() {
 	
 	var file = document.getElementById("thefile");
 	var audio = document.getElementById("audio");
+	
+	canvas = document.createElement('canvas');
+	canvas.width = w;
+    canvas.height = h;
+    document.body.appendChild(canvas);
+    ctx = canvas.getContext('2d');
+	
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
 	file.onchange = function() {
 	
 	var files = this.files;
 	
 	document.getElementById("thefile").style.visibility = 'hidden';
-    
-	canvas = document.createElement('canvas');
-    canvas.width = 400;
-    canvas.height = 800;
-    document.body.appendChild(canvas);
-    ctx = canvas.getContext('2d');
 	
 	grdCol = [[0, 0.05, 1], ["green", "yellow", "red"]];
 	
-	ecanonpos = [50, 150, 250, 350];
+	bulletW = canvas.width / 50;
+	bulletH = canvas.height / 27;
+	
+	ecanonpos = [
+	(canvas.width / 5) - bulletW / 2, 
+	(canvas.width / 5 * 2) - bulletW / 2, 
+	(canvas.width / 5 * 3) - bulletW / 2, 
+	(canvas.width / 5 * 4) - bulletW / 2
+	];
     
     setupWebAudio(files);
 	
@@ -62,7 +76,7 @@ function draw() {
     for (var i = 0; i < circles.length; i++) {
         circles[i].radius = freqByteData[i] / 5;
         circles[i].y = circles[i].y > canvas.height - 1 ? 0 : circles[i].y + 1;
-		circles[i].x = circles[i].y > canvas.height ? random() * canvas.width : circles[i].x; //maybe rework it, kinda mess
+		circles[i].x = circles[i].y > canvas.height ? random() * canvas.width : circles[i].x;
         circles[i].draw();
     }
 	
@@ -81,7 +95,7 @@ function draw() {
 	for (var i = 0; i < ebullets.length; i++){		
 		if (ebullets[i].y >= canvas.height && ebullets[i].destroyed == false){
 			ebullets[i].destroyed = true;
-			score -= 20;
+			score = score - 20 > 0 ? score - 20 : 0;
 		}
 		
 		if (ebullets[i].destroyed == false){
@@ -92,24 +106,23 @@ function draw() {
 				pbullets[j].destroyed = true;
 				score += 10;
 			}
-		}
-			
-			ebullets[i].y += 10;
+		}		
+			ebullets[i].y += canvas.height / 80;
 			ctx.fillStyle = "red";
-			ctx.fillRect(ebullets[i].x, ebullets[i].y, 10, 30);
+			ctx.fillRect(ebullets[i].x, ebullets[i].y, bulletW, bulletH);
 		}
 	}
 	
 	for (var i = 0; i < pbullets.length; i++){
 		if (pbullets[i].y <= 0 && pbullets[i].destroyed == false){
 			pbullets[i].destroyed = true;
-			score -= 10;
+			score = score - 20 > 0 ? score - 20 : 0;
 		}
 		
 		if (pbullets[i].destroyed == false){
-			pbullets[i].y -= 20;
+			pbullets[i].y -= canvas.height / 40;
 			ctx.fillStyle = "green";
-			ctx.fillRect(pbullets[i].x, pbullets[i].y, 10, 30);
+			ctx.fillRect(pbullets[i].x, pbullets[i].y, bulletW, bulletH);
 		}
 	}
 	
@@ -144,7 +157,7 @@ Circle.prototype.draw = function() {
     var that = this;
     ctx.save();
     ctx.beginPath();
-    ctx.globalAlpha = /*random() / 3 + */ 0.2;
+    ctx.globalAlpha = 0.2;
     ctx.arc(that.x, that.y, that.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.fill();
@@ -157,8 +170,6 @@ function checkFreqHeight(freq) {
 		idealscore += 10;
 		var sound = new Audio('assets/sound.mp3');
 		sound.play();
-		/*ctx.fillStyle = "red";
-		ctx.fillRect(canvas.width / 2, canvas.height / 2, 10, 10);*/
 		ebullets.push(new ebullet());
 	}
 }
