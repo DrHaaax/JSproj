@@ -130,8 +130,16 @@ function draw() {
 		ctx.font = "30px Arial";
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-		ctx.fillText("score: " + score, canvas.width / 2, canvas.height / 2);
-		ctx.fillText("ideal score: " + idealscore, canvas.width / 2, canvas.height / 2 + 50);
+		ctx.fillText(score + " / " + idealscore, canvas.width / 2, canvas.height / 2);
+		if (score < idealscore * 0.5){
+		ctx.fillText("Eh, maybe try again?", canvas.width / 2, canvas.height / 2 + 50);
+		}
+		if (score > idealscore * 0.5 && score!=idealscore){
+		ctx.fillText("Good!", canvas.width / 2, canvas.height / 2 + 50);
+		}
+		if (score == idealscore){
+		ctx.fillText("P E R F E C T", canvas.width / 2, canvas.height / 2 + 50);
+		}
 	} else {
 		ctx.font = "30px Arial";
 		ctx.fillStyle = "white";
