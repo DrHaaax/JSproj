@@ -58,7 +58,7 @@ window.onload = function() {
 //for beatDetector
 function setupWebAudio(files) {
 	audio = new stasilo.BeatDetector({
-		sens: 5, 
+		sens: 3, 
 		visualizerFFTSize: 256, 
 		analyserFFTSize: 256, 
 		passFreq: 600,
@@ -80,14 +80,23 @@ function draw() {
         circles[i].draw();
     }
 	
-	var x = 0;
+	ctx.fillStyle = "aqua";
+	ctx.globalAlpha = 0.2;
+	ctx.fillRect(0, canvas.height / 20, canvas.width, canvas.height / 40);
+	ctx.globalAlpha = 1;
 	
-    for (var i = 0; i < freqByteData.length; i++){
+	var y = 0;
+	
+	for (var i = 0; i < freqByteData.length; i++){
 		ctx.fillStyle = shuffleGrd();
-		ctx.fillRect(x, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i] / 2);
-        ctx.strokeRect(x, 0, canvas.width / freqByteData.length * 2.5, freqByteData[i] / 2);
 		
-		x += (canvas.width / freqByteData.length * 2.5) + 1;
+		ctx.fillRect(0, y, freqByteData[i] / 4, canvas.height / freqByteData.length * 2.5);
+        ctx.strokeRect(0, y, freqByteData[i] / 4, canvas.height / freqByteData.length * 2.5);
+		
+		ctx.fillRect(canvas.width - freqByteData[i] / 4, y, canvas.width, canvas.height / freqByteData.length * 2.5);
+        ctx.strokeRect(canvas.width - freqByteData[i] / 4, y, canvas.width, canvas.height / freqByteData.length * 2.5);
+		
+		y += (canvas.height / freqByteData.length * 2.5) + 1;
     }
 	
 	checkFreqHeight();	
@@ -95,11 +104,12 @@ function draw() {
 	for (var i = 0; i < ebullets.length; i++){		
 		if (ebullets[i].y >= canvas.height && ebullets[i].destroyed == false){
 			ebullets[i].destroyed = true;
-			score = score - 20 > 0 ? score - 20 : 0;
+			score = score - 5 > 0 ? score - 5 : 0;
+			//hit player canon
+			screenBlink("red");
 		}
 		
-		if (ebullets[i].destroyed == false){
-			
+		if (ebullets[i].destroyed == false){	
 			for (var j = 0; j < pbullets.length; j++){  //check collision between bullets
 			if (pbullets[j].x == ebullets[i].x && pbullets[j].y <= ebullets[i].y && pbullets[j].destroyed == false){
 				ebullets[i].destroyed = true;
@@ -116,7 +126,9 @@ function draw() {
 	for (var i = 0; i < pbullets.length; i++){
 		if (pbullets[i].y <= 0 && pbullets[i].destroyed == false){
 			pbullets[i].destroyed = true;
-			score = score - 20 > 0 ? score - 20 : 0;
+			score = score - 5 > 0 ? score - 5 : 0;
+			//hit wall
+			screenBlink("aqua");
 		}
 		
 		if (pbullets[i].destroyed == false){
@@ -125,6 +137,8 @@ function draw() {
 			ctx.fillRect(pbullets[i].x, pbullets[i].y, bulletW, bulletH);
 		}
 	}
+	
+	canons();
 	
 	if (audio.isFinished() && ebullets[ebullets.length - 1].destroyed == true) {
 		ctx.font = "30px Arial";
@@ -147,7 +161,7 @@ function draw() {
 		ctx.fillText("score: " + score, 5, 25);
 		ctx.font = "20px Arial";
 		ctx.fillText("shoot the red lasers on [1] [2] [3] [4] buttons", 5, canvas.height - 5);
-	} 
+	} 	
 }
 
 function getRandomColor(){
@@ -195,8 +209,8 @@ function shuffleGrd(){
 			grdCol[1][i] = 'rgb(' + getRandomColor() + ',' + getRandomColor() + ',' + getRandomColor() + ')';
 		}
 	}
-	grdCol[0][1] = reverse == false ? grdCol[0][1] + 0.00005 : grdCol[0][1] - 0.00005;
-	var grd = ctx.createLinearGradient(0,0,canvas.width,0);
+	grdCol[0][1] = reverse == false ? grdCol[0][1] + 0.00002 : grdCol[0][1] - 0.00002;
+	var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
 	grd.addColorStop(grdCol[0][0],grdCol[1][0]);
 	grd.addColorStop(grdCol[0][1],grdCol[1][1]);
 	grd.addColorStop(grdCol[0][2],grdCol[1][2]);
@@ -213,6 +227,21 @@ function pbullet(x) {
 	this.x = x;
 	this.y = canvas.height;
     this.destroyed = false;
+}
+
+function canons(){
+	ctx.fillStyle = "gray";
+	for (var i = 0; i < ecanonpos.length; i++){
+		ctx.fillRect(ecanonpos[i], 0, bulletW, bulletH * 1.2);
+		ctx.fillRect(ecanonpos[i], canvas.height - bulletH * 1.2, bulletW, canvas.height - bulletH * 1.2);
+	}
+}
+
+function screenBlink(col){
+	ctx.fillStyle = col;
+	ctx.globalAlpha = 0.3;
+	ctx.fillRect(0,0,canvas.width,canvas.height);
+	ctx.globalAlpha = 1;
 }
 
 function keyDownHandler(e) {
