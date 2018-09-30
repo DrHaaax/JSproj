@@ -11,4 +11,5 @@ canvas {
 #thefile {
 	z-index:2; 
 	position: absolute;
+	color: transparent;
 }

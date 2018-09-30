@@ -1,15 +1,20 @@
 var analyser, canvas, ctx, random = Math.random, circles = [], ebullets = [], pbullets = [];
 
-used = false;
+var used = false;
 
-reverse = false;
+var reverse = false;
 
-idealscore = 0;
+var idealscore = 0;
 
-score = 0;
+var score = 0;
 
-h = window.innerHeight;
-w = h / 2;
+var h = window.innerHeight;
+var w = h / 2;
+
+var theEND = false;
+
+var img = new Image(); 
+img.src = 'assets/logo.png';
 
 window.onload = function() {
 	
@@ -24,6 +29,13 @@ window.onload = function() {
 	
 	ctx.fillStyle = "black";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	
+	ctx.drawImage(img, 0, canvas.height / 3, canvas.width, canvas.width / 3.3);
+	
+	var browsebtn = document.getElementById("thefile");
+	browsebtn.style.top = canvas.height / 2 + 'px';
+	browsebtn.style.left = canvas.width / 3 + 'px';
+	browsebtn.style.width = canvas.width + 'px';
 	
 	file.onchange = function() {
 	
@@ -51,7 +63,7 @@ window.onload = function() {
         circles[i] = new Circle();
         circles[i].draw();
     }
-    draw();
+	draw();
 	}
 };
 
@@ -65,7 +77,7 @@ function setupWebAudio(files) {
 		url: URL.createObjectURL(files[0])});
 }
 
-function draw() {
+function draw() {		
 	requestAnimationFrame(draw);
     ctx.clearRect(0, 0, canvas.width, canvas.height);	
 	ctx.fillStyle = "black";
@@ -80,23 +92,26 @@ function draw() {
         circles[i].draw();
     }
 	
+	if (theEND == false){
 	ctx.fillStyle = "aqua";
 	ctx.globalAlpha = 0.2;
 	ctx.fillRect(0, canvas.height / 20, canvas.width, canvas.height / 40);
 	ctx.globalAlpha = 1;
+	}
 	
 	var y = 0;
+	var freqlength = canvas.height / freqByteData.length * 2.5;
 	
 	for (var i = 0; i < freqByteData.length; i++){
 		ctx.fillStyle = shuffleGrd();
 		
-		ctx.fillRect(0, y, freqByteData[i] / 4, canvas.height / freqByteData.length * 2.5);
-        ctx.strokeRect(0, y, freqByteData[i] / 4, canvas.height / freqByteData.length * 2.5);
+		ctx.fillRect(0, y, freqByteData[i] / 4, freqlength);
+        ctx.strokeRect(0, y, freqByteData[i] / 4, freqlength);
 		
-		ctx.fillRect(canvas.width - freqByteData[i] / 4, y, canvas.width, canvas.height / freqByteData.length * 2.5);
-        ctx.strokeRect(canvas.width - freqByteData[i] / 4, y, canvas.width, canvas.height / freqByteData.length * 2.5);
+		ctx.fillRect(canvas.width - freqByteData[i] / 4, y, canvas.width, freqlength);
+        ctx.strokeRect(canvas.width - freqByteData[i] / 4, y, canvas.width, freqlength);
 		
-		y += (canvas.height / freqByteData.length * 2.5) + 1;
+		y += freqlength + 1;
     }
 	
 	checkFreqHeight();	
@@ -124,7 +139,7 @@ function draw() {
 	}
 	
 	for (var i = 0; i < pbullets.length; i++){
-		if (pbullets[i].y <= 0 && pbullets[i].destroyed == false){
+		if (pbullets[i].y <= canvas.height / 20 && pbullets[i].destroyed == false){
 			pbullets[i].destroyed = true;
 			score = score - 5 > 0 ? score - 5 : 0;
 			//hit wall
@@ -138,29 +153,32 @@ function draw() {
 		}
 	}
 	
+	if (theEND == false){
 	canons();
+	}
 	
-	if (audio.isFinished() && ebullets[ebullets.length - 1].destroyed == true) {
-		ctx.font = "30px Arial";
+	if (audio.isFinished() && ebullets.every(fullEndCheck)) {
+		theEND = true;
+		document.removeEventListener("keydown", keyDownHandler);
+		pbullets.every(killAllpbullets);
+		ctx.font = canvas.width / 10 + 'px Arial';
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
 		ctx.fillText(score + " / " + idealscore, canvas.width / 2, canvas.height / 2);
 		if (score < idealscore * 0.5){
-		ctx.fillText("Eh, maybe try again?", canvas.width / 2, canvas.height / 2 + 50);
+		finalRank("Eh, maybe try again?");
 		}
-		if (score > idealscore * 0.5 && score!=idealscore){
-		ctx.fillText("Good!", canvas.width / 2, canvas.height / 2 + 50);
+		if (score >= idealscore * 0.5 && score!=idealscore){
+		finalRank("Good!");
 		}
 		if (score == idealscore){
-		ctx.fillText("P E R F E C T", canvas.width / 2, canvas.height / 2 + 50);
+		finalRank("P E R F E C T");
 		}
 	} else {
-		ctx.font = "30px Arial";
+		ctx.font = canvas.width / 15 + 'px Arial';
 		ctx.fillStyle = "white";
 		ctx.textAlign = "left";
-		ctx.fillText("score: " + score, 5, 25);
-		ctx.font = "20px Arial";
-		ctx.fillText("shoot the red lasers on [1] [2] [3] [4] buttons", 5, canvas.height - 5);
+		ctx.fillText("score: " + score, canvas.width / 90, canvas.height / 36);
 	} 	
 }
 
@@ -242,6 +260,18 @@ function screenBlink(col){
 	ctx.globalAlpha = 0.3;
 	ctx.fillRect(0,0,canvas.width,canvas.height);
 	ctx.globalAlpha = 1;
+}
+
+function fullEndCheck(element, index, array) {
+  return element.destroyed == true;
+}
+
+function killAllpbullets(element, index, array) {
+  element.destroyed = true;
+}
+
+function finalRank(txt){
+	ctx.fillText(txt, canvas.width / 2, canvas.height / 2 + 50);
 }
 
 function keyDownHandler(e) {
